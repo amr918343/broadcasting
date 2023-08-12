@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ChatController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +15,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return abort('404');
+    return redirect('/home');
 });
+
+Auth::routes();
+
+// Home page
+Route::get('/home', [ChatController::class, 'index'])->name('home');
+
+// Room routes
+Route::resource('room', 'Room\RoomController');
+
+// User routes
+Route::get('/users', 'UserController@index')->name('users.index');
+Route::get('/users/{user}', 'UserController@show')->name('users.show');

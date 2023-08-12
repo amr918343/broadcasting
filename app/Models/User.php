@@ -62,6 +62,24 @@ class User extends Authenticatable
 
     ########################RELATIONS########################
 
+        // rooms
+        public function ownedRooms() {
+            return $this->hasMany(Room::class, 'owner_id');
+        }
+
+        public function rooms() {
+            return $this->belongsToMany(Room::class);
+        }
+
+        // chats
+        public function chats() {
+            return $this->hasMany(Chat::class, 'senders_id');
+        }
+        // messages
+        public function messages() {
+            return $this->hasMany(Message::class);
+        }
+        // rooms
     ########################ACCESSORS########################
 
     ########################MUTATORS########################
